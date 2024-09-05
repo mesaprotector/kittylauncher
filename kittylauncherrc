@@ -1,0 +1,45 @@
+#Kitty Launcher config file. Work in progress. For now it only controls the available commands
+#but more functionality will be added.
+
+#applications
+
+#without aliases, 0 args (might eventually delete this section)
+audacious;audacious;0
+audacity;audacity;0
+blueman-applet;blueman-applet;0
+crqt;crqt;0
+firefox;firefox;0
+gimp;gimp;0
+kitty;kitty;0
+kristall;kristall;0
+kvantummanager;kvantummanager;0
+leafpad;leafpad;0
+libreoffice;libreoffice;0
+lxappearance;lxappearance;0
+nemo;nemo;0
+nomacs;nomacs;0
+piper;piper;0
+qbittorrent;qbittorrent;0
+thunderbird;thunderbird;0
+torbrowser-launcher;torbrowser-launcher;0
+
+#without aliases, 1+ args
+mpv;mpv;3
+nitrogen;nitrogen;1
+picom;picom;2
+prime-run;prime-run boxxy;1
+
+#aliased
+beersmith3;boxxy beersmith3;0
+cobang;gtk3-nocsd cobang;0
+discord;boxxy discord;0
+golly;GTK_THEME=Breeze boxxy golly;0
+nvidia-settings;nvidia-settings --config="$XDG_CONFIG_HOME"/nvidia/settings;0
+praat;GTK_THEME=Breeze boxxy praat;1
+slock;slock & xset dpms force off;0
+unigine-superposition;boxxy unigine-superposition;0
+
+#complex commands (must be last!)
+camera;mpv av://v4l2:/dev/video0 --profile=low-latency --untimed --demuxer-lavf-o-set=video_size=1920x1080,input_format=mjpeg,framerate=30;0
+loud;kitty --title "Matrix" --hold sh -c 'gomuks' & thunderbird & boxxy discord;0
+quiet;wmctrl -c 'Discord' & wmctrl -c 'Thunderbird' & kill $(xprop -name "Matrix" _NET_WM_PID);0

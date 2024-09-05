@@ -1,0 +1,17 @@
+#!/bin/bash
+if grep -q "$1" ~/.config/kittylauncherrc; then
+	app=$(grep "$1" ~/.config/kittylauncherrc | head -n1 | cut -d ';' -f 2-2)
+	argnum=$(grep "$1" ~/.config/kittylauncherrc | head -n1 | cut -d ';' -f 3-3)
+        if [ "$argnum" = "0" ]; then
+        	fullapp="$app"	
+        elif [ "$argnum" = "1" ]; then
+                fullapp="$app $2"
+        elif [ "$argnum" = "2" ]; then
+                fullapp="$app $2 $3"
+        else 
+		fullapp="$app $@"
+	fi
+	echo "$fullapp" > ~/.local/state/kittylauncher/_output
+else
+	echo "true" > ~/.local/state/kittylauncher/_output
+fi
