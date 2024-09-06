@@ -1,0 +1,20 @@
+function _kitty-launch()
+{
+  latest="${COMP_WORDS[$COMP_CWORD]}"
+  prev="${COMP_WORDS[$COMP_CWORD - 1]}"
+  words=""
+  case "${prev}" in
+    kitty-launch)
+      words="prime-run firefox praat"
+      ;;
+    prime-run)
+      words="firefox praat"
+      ;;
+    *)
+      ;;
+  esac
+  COMPREPLY=($(compgen -W "$words" -- $latest))
+  return 0
+}
+
+complete -F _kitty-launch kitty-launch
