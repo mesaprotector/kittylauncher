@@ -1,4 +1,4 @@
-# kitty-launcher
+# kittylauncher
 Use terminal emulator as basic application launcher
 
 Just launches a small terminal window with "kitty-launch" prefilled (using xdotool; if I ever migrate to Wayland I'll switch
