@@ -1,12 +1,12 @@
 #Kitty Launcher config file. Work in progress. For now it only controls the available commands
 #but more functionality will be added.
 
-#Applications
+#wrappers (wrapper commands MUST have a semicolon at the beginning of the line)
+#Examples:
+#;prime-run;prime-run;2
 
+#applications
 #The format is: ARGUMENT;;COMMAND;NUMBER (number defaults to ∞ if not present).
-#For now, if one argument ENDS with another as a substring (example: rm and hdparm) the shorter
-#one must be first, or it will run the wrong command.
 #Examples:
 #firefox;;firefox;0
-#praat;;GTK_THEME=Breeze boxxy praat;1
-#prime-run;;prime-run;2
+#nvidia-settings;;nvidia-settings --config="$XDG_CONFIG_HOME"/nvidia/settings;1
