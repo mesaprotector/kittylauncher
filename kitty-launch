@@ -1,7 +1,12 @@
 #!/bin/bash
-if grep -qE "^$1;;|^;$1;" ~/.config/kittylauncherrc; then
-	app=$(grep "$1" ~/.config/kittylauncherrc | head -n1 | cut -d ';' -f 2-2)
-	argnum=$(grep "$1" ~/.config/kittylauncherrc | head -n1 | cut -d ';' -f 3-3)
+if [ -z "$XDG_CONFIG_HOME" ]; then
+  	kittylauncher_configdir="~/.config"
+else
+  	kittylauncher_configdir="$XDG_CONFIG_HOME"
+fi
+if grep -qE "^$1;;|^;$1;" $kittylauncher_configdir/kittylauncherrc; then
+	app=$(grep "$1" $kittylauncher_configdir/kittylauncherrc | head -n1 | cut -d ';' -f 2-2)
+	argnum=$(grep "$1" $kittylauncher_configdir/kittylauncherrc | head -n1 | cut -d ';' -f 3-3)
         if [ "$argnum" = "0" ]; then
         	fullapp="$app"	
         elif [ "$argnum" = "1" ]; then
