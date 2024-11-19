@@ -1,5 +1,10 @@
 function _kitty-launch()
 {
+  if [ -z "$XDG_CONFIG_HOME" ]; then
+  	kittylauncher_configdir="~/.config"
+  else
+  	kittylauncher_configdir="$XDG_CONFIG_HOME"
+  fi
   latest="${COMP_WORDS[$COMP_CWORD]}"
   prev="${COMP_WORDS[$COMP_CWORD - 1]}"
   words=""
