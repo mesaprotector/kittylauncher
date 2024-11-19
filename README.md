@@ -11,6 +11,5 @@ separate aliases from what is in your .bashrc. It then writes the parsed output 
 executed by the wrapper kittylauncher.sh script. 
 
 Future tasks are: 
-- have the bash-completion file grab its possible completions directly from kittylauncherrc
 - more configurability (set paths in kittylauncherrc)
 - figure out how to package literally anything
