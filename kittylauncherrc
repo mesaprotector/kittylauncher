@@ -1,12 +1,19 @@
 #Kitty Launcher config file. Work in progress. For now it only controls the available commands
 #but more functionality will be added.
-
+#
 #wrappers (wrapper commands MUST have a semicolon at the beginning of the line)
 #Examples:
 #;prime-run;prime-run;2
-
+#
 #applications
 #The format is: ARGUMENT;;COMMAND;NUMBER (number defaults to ∞ if not present).
 #Examples:
 #firefox;;firefox;0
 #nvidia-settings;;nvidia-settings --config="$XDG_CONFIG_HOME"/nvidia/settings;1
+#
+#directory paths
+#this directory will determine where the commands are parsed and outputted to,
+#as well as where nohup saves output. you can put it on a tmpfs if you like.
+statedir="$XDG_STATE_HOME/kittylauncher/"
+#this is the default working directory of kitty-launcher.
+workdir="$HOME/"
