@@ -10,6 +10,4 @@ The kitty-launch function parses a set number of arguments according to the conf
 separate aliases from what is in your .bashrc. It then writes the parsed output to a file called _output, which is itself
 executed by the wrapper kittylauncher.sh script. 
 
-Future tasks are: 
-- more configurability (set paths in kittylauncherrc)
-- figure out how to package literally anything
+See open issues for information on future work.
