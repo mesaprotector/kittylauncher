@@ -1,15 +1,16 @@
 function _kitty-launch()
 {
   if [ -z "$XDG_CONFIG_HOME" ]; then
-  	kittylauncher_configdir="~/.config"
+  	configdir="~/.config"
   else
-  	kittylauncher_configdir="$XDG_CONFIG_HOME"
+  	configdir="$XDG_CONFIG_HOME"
   fi
+  configdir=`eval echo $configdir`
   latest="${COMP_WORDS[$COMP_CWORD]}"
   prev="${COMP_WORDS[$COMP_CWORD - 1]}"
   words=""
-  simple_cmds="$(cat $kittylauncher_configdir/kittylauncherrc | grep ';' | cut -d ';' -f 1-1 | tr '\n' ' ' | sed 's/[ ][ ]*/ /g')"
-  wrapper_cmds="$(cat $kittylauncher_configdir/kittylauncherrc | grep ';' | cut -d ';' -f 2-2 | tr '\n' ' ' | sed 's/[ ][ ]*/ /g')"
+  simple_cmds="$(cat $configdir/kittylauncherrc | grep ';' | cut -d ';' -f 1-1 | tr '\n' ' ' | sed 's/[ ][ ]*/ /g')"
+  wrapper_cmds="$(cat $configdir/kittylauncherrc | grep ';' | cut -d ';' -f 2-2 | tr '\n' ' ' | sed 's/[ ][ ]*/ /g')"
   case "${prev}" in
     kitty-launch)
       words=("$simple_cmds $wrapper_cmds")
