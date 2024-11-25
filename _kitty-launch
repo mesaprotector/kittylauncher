@@ -1,32 +1,34 @@
 function _kitty-launch()
 {
-  if [ -z "$XDG_CONFIG_HOME" ]; then
-  	configdir="~/.config"
-  else
-  	configdir="$XDG_CONFIG_HOME"
-  fi
-  configdir=`eval echo $configdir`
-  latest="${COMP_WORDS[$COMP_CWORD]}"
-  prev="${COMP_WORDS[$COMP_CWORD - 1]}"
-  words=""
-  simple_cmds="$(cat $configdir/kittylauncherrc | grep ';' | cut -d ';' -f 1-1 | tr '\n' ' ' | sed 's/[ ][ ]*/ /g')"
-  wrapper_cmds="$(cat $configdir/kittylauncherrc | grep ';' | cut -d ';' -f 2-2 | tr '\n' ' ' | sed 's/[ ][ ]*/ /g')"
-  case "${prev}" in
-    kitty-launch)
-      words=("$simple_cmds $wrapper_cmds")
-      ;;
-    *)
-      ;;
-  esac
-  case "${wrapper_cmds}" in
-    *$prev*)
-      words=("$simple_cmds")
-      ;;
-    *)
-      ;;
-  esac
-  COMPREPLY=($(compgen -W "$words" -- $latest))
-  return 0
+	if [ -z "$XDG_CONFIG_HOME" ]; then
+		configdir="$HOME/.config"
+	else
+		configdir="$XDG_CONFIG_HOME"
+	fi
+	configdir="`eval echo "$configdir"`"
+	latest="${COMP_WORDS[$COMP_CWORD]}"
+	prev="${COMP_WORDS[$COMP_CWORD - 1]}"
+	words=""
+	simple_cmds="`cat "$configdir"/kittylauncherrc | grep ';' \
+	| cut -d ';' -f 1-1 | tr '\n' ' ' | sed 's/[ ][ ]*/ /g'`"
+	wrapper_cmds="`cat "$configdir"/kittylauncherrc | grep ';' \
+	| cut -d ';' -f 2-2 | tr '\n' ' ' | sed 's/[ ][ ]*/ /g'`"
+	case "${prev}" in
+		kitty-launch)
+			words=("$simple_cmds $wrapper_cmds")
+			;;
+		*)
+			;;
+	esac
+	case "${wrapper_cmds}" in
+		*$prev*)
+			words=("$simple_cmds")
+			;;
+		*)
+			;;
+	esac
+	COMPREPLY=($(compgen -W "$words" -- "$latest"))
+	return 0
 }
 
 complete -F _kitty-launch kitty-launch
