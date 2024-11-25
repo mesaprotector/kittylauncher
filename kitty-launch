@@ -1,23 +1,26 @@
 #!/bin/bash
 # Set up directories first.
 if [ -z "$XDG_CONFIG_HOME" ]; then 
-	configdir="~/.config"
+	configdir="$HOME/.config"
 else
 	configdir="$XDG_CONFIG_HOME"
 fi
-statedir=`cat $configdir/kittylauncherrc | grep ^statedir | cut -d '=' -f 2-2`
+statedir="`cat "$configdir"/kittylauncherrc | grep ^statedir \
+| cut -d '=' -f 2-2`"
 if [ -z "$statedir" ]; then
 	if [ -z "$XDG_STATE_HOME" ]; then
-		statedir="~/.local/state/kittylauncher"
+		statedir="$HOME/.local/state/kittylauncher"
 	else
 		statedir="$XDG_STATE_HOME/kittylauncher"
 	fi
 fi
-configdir=`eval echo $configdir`
-statedir=`eval echo $statedir`
-if grep -qE "^$1;;|^;$1;" $configdir/kittylauncherrc; then
-	app=$(grep "$1" $configdir/kittylauncherrc | head -n1 | cut -d ';' -f 3-3)
-	argnum=$(grep "$1" $configdir/kittylauncherrc | head -n1 | cut -d ';' -f 4-4)
+configdir="`eval echo "$configdir"`"
+statedir="`eval echo "$statedir"`"
+if grep -qE "^$1;;|^;$1;" "$configdir"/kittylauncherrc; then
+	app="`grep "$1" "$configdir"/kittylauncherrc | head -n1 \
+	| cut -d ';' -f 3-3`"
+	argnum="`grep "$1" "$configdir"/kittylauncherrc | head -n1 \
+	| cut -d ';' -f 4-4`"
         if [ "$argnum" = "0" ]; then
         	fullapp="$app"	
         elif [ "$argnum" = "1" ]; then
@@ -25,9 +28,9 @@ if grep -qE "^$1;;|^;$1;" $configdir/kittylauncherrc; then
         elif [ "$argnum" = "2" ]; then
                 fullapp="$app $2 $3"
         else 
-		fullapp="$app $@"
+		fullapp="$app $*"
 	fi
-	echo "$fullapp" > $statedir/_output
+	echo "$fullapp" > "$statedir"/_output
 else
-	echo "true" > $statedir/_output
+	echo "true" > "$statedir"/_output
 fi
