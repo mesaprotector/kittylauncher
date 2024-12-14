@@ -16,6 +16,8 @@ if [ -z "$statedir" ]; then
 fi
 configdir="`eval echo "$configdir"`"
 statedir="`eval echo "$statedir"`"
+
+# Parse arguments of `kitty-launch` and save to _output.
 if grep -qE "^$1;;|^;$1;" "$configdir"/kittylauncherrc; then
 	app="`grep "$1" "$configdir"/kittylauncherrc | head -n1 \
 	| cut -d ';' -f 3-3`"
@@ -30,7 +32,7 @@ if grep -qE "^$1;;|^;$1;" "$configdir"/kittylauncherrc; then
         else 
 		fullapp="$app $*"
 	fi
-	echo "$fullapp" > "$statedir"/_output
+	echo "$fullapp" | tee "$statedir"/_output
 else
-	echo "true" > "$statedir"/_output
+	echo "true" | tee "$statedir"/_output
 fi
