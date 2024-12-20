@@ -54,8 +54,8 @@ if [ "`pgrep -f "/lib/kittylauncher/prefill.sh" | wc -l`" = 0 ]; then
 	kitty -T "Kitty Launcher" sh -c 'bash -t'
 else
 	statedir="$statedir" \
-	PROMPT_COMMAND='PS1="kitty-launch! > "; echo "`tty`" > \ 
-	"$statedir/tty"' kitty -T "Kitty Launcher" sh -c 'bash -t'
+	PROMPT_COMMAND='PS1="kitty-launch! > "; echo "`tty`" > "$statedir"tty' \
+	kitty -T "Kitty Launcher" sh -c 'bash -t'
 fi
 
 # Run command from workdir after terminal exits.
