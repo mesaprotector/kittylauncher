@@ -3,7 +3,9 @@ Description = Prefills 'kitty-launch' in terminal application launcher
 
 [Service]
 Type=simple
-Environment="statedir=/home/asuka/.local/state/kittylauncher"
+# To use this service, copy your statedir from your kittylauncherrc to
+# the line below as a full directory path, and then uncomment it.
+# Environment="statedir=/HERE"
 ExecStart=/lib/kittylauncher/prefill.sh
 Restart=on-failure
 
