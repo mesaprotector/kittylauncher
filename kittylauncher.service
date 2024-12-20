@@ -3,7 +3,7 @@ Description = Prefills 'kitty-launch' in terminal application launcher
 
 [Service]
 Type=simple
-Environment="statedir=/home/asuka/.local/state/kittylauncher/"
+Environment="statedir=/home/asuka/.local/state/kittylauncher"
 ExecStart=/lib/kittylauncher/prefill.sh
 Restart=on-failure
 
