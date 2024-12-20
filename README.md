@@ -1,12 +1,12 @@
 # kittylauncher
 Use terminal emulator as basic application launcher
 
-Just launches a small terminal window with "kitty-launch" prefilled (using
-xdotool; if I ever migrate to Wayland I'll switch to using a systemd service
-with entr + ttyecho, the same as my other project sudo-comment). I didn't
-like the desktop-entry paradigm for launching applications, and I've always
-done it from the terminal, but with the result of some annoying STDOUT spam and
-SIGHUP behavior. 
+Just launches a small terminal window with "kitty-launch" prefilled. It can use
+either xdotool for this, or a systemd service with entr and ttyecho; the latter 
+has some minor overhead, but is Wayland-friendly and slightly faster; you can 
+choose which according to preference. I didn't like the desktop-entry paradigm
+for launching applications, and I've always done it from the terminal, but with
+the result of some annoying STDOUT spam and SIGHUP behavior. 
 
 The kitty-launch function parses a set number of arguments according to the
 config file, basically allowing you to have separate aliases from what is in

@@ -27,7 +27,17 @@ function _kitty-launch()
 		*)
 			;;
 	esac
-	COMPREPLY=($(compgen -W "$words" -- "$latest"))
+	if [ -z "$words" ]; then
+		case "${simple_cmds}" in
+			*$prev*)
+			COMPREPLY=($(compgen -f -- "$latest"))
+			;;
+		*)
+			;;
+		esac
+	else
+		COMPREPLY=($(compgen -W "$words" -- "$latest"))
+	fi
 	return 0
 }
 
