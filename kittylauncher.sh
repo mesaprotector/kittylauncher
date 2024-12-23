@@ -43,13 +43,11 @@ fi
 # Switch working directory to workdir.
 cd "$workdir" || exit;
 
-# Check if caps lock is on and turn it off if so.
-if [ "`xset q | grep Caps | awk '{print $4}'`" = "on" ]; then
-	xdotool key Caps_Lock
-fi
-
 # Launch terminal. Use entr/ttyecho if possible, otherwise xdotool.
 if [ "`pgrep -f "/lib/kittylauncher/prefill.sh" | wc -l`" = 0 ]; then
+	if [ "`xset q | grep Caps | awk '{print $4}'`" = "on" ]; then
+		xdotool key Caps_Lock
+	fi
 	PROMPT_COMMAND='PS1="! > "; xdotool type "kitty-launch "' \
 	kitty -T "Kitty Launcher" sh -c 'bash -t'
 else
