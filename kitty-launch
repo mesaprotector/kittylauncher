@@ -23,15 +23,11 @@ if grep -qE "^$1;;|^;$1;" "$configdir"/kittylauncherrc; then
 	| cut -d ';' -f 3-3`"
 	argnum="`grep "$1" "$configdir"/kittylauncherrc | head -n1 \
 	| cut -d ';' -f 4-4`"
-        if [ "$argnum" = "0" ]; then
-        	fullapp="$app"	
-        elif [ "$argnum" = "1" ]; then
-                fullapp="$app $2"
-        elif [ "$argnum" = "2" ]; then
-                fullapp="$app $2 $3"
-        else 
-		fullapp="$app $*"
+	shift
+	if [ -z "$argnum" ] || [ "$argnum" !lt $# ]; then
+		echo "true" | tee "$statedir"/_output
 	fi
+        fullapp="$app $*"	
 	echo "$fullapp" | tee "$statedir"/_output
 else
 	echo "true" | tee "$statedir"/_output
