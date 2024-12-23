@@ -1,6 +1,6 @@
 #!/bin/bash
 # Exit if running as root.
-if [ `/usr/bin/id` = "0"]; then
+if [ "`/bin/id -u`" = "0" ]; then
 	exit
 fi
 
@@ -30,15 +30,12 @@ if [ ! -d "$statedir" ]; then
 	mkdir "$statedir"
 fi
 
-# Set workdir location listed in config file. Exit if it doesn't exist.
+# Set workdir location listed in config file.
 workdir="`cat "$configdir"/kittylauncherrc | grep ^workdir | cut -d '=' -f 2-2`"
 if [ -z "$workdir" ]; then
 	workdir="$HOME"
 fi
 workdir="`eval echo "$workdir"`"
-if [ ! -d "$workdir" ]; then
-	exit
-fi
 
 # Switch working directory to workdir.
 cd "$workdir" || exit;
