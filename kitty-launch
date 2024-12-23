@@ -24,11 +24,12 @@ if grep -qE "^$1;;|^;$1;" "$configdir"/kittylauncherrc; then
 	argnum="`grep "$1" "$configdir"/kittylauncherrc | head -n1 \
 	| cut -d ';' -f 4-4`"
 	shift
-	if [ -z "$argnum" ] || [ "$argnum" !lt $# ]; then
+	if [ -z "$argnum" ] || [ "$argnum" -lt $# ]; then
 		echo "true" | tee "$statedir"/_output
+	else
+        	fullapp="$app $*"	
+		echo "$fullapp" | tee "$statedir"/_output
 	fi
-        fullapp="$app $*"	
-	echo "$fullapp" | tee "$statedir"/_output
 else
 	echo "true" | tee "$statedir"/_output
 fi
