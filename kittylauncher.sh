@@ -40,6 +40,9 @@ workdir="`eval echo "$workdir"`"
 # Switch working directory to workdir.
 cd "$workdir" || exit;
 
+# Make sure that nothing is run if kitty-launch fails later.
+echo "true" > "$statedir"/_output
+
 # Launch terminal. Use entr/ttyecho if possible, otherwise xdotool.
 if [ "`pgrep -f "/lib/kittylauncher/prefill.sh" | wc -l`" = 0 ]; then
 	if [ "`xset q | grep Caps | awk '{print $4}'`" = "on" ]; then
@@ -49,7 +52,7 @@ if [ "`pgrep -f "/lib/kittylauncher/prefill.sh" | wc -l`" = 0 ]; then
 	kitty -T "Kitty Launcher" sh -c 'bash -t'
 else
 	statedir="$statedir" \
-	PROMPT_COMMAND='PS1="kitty-launch! > "; echo "`tty`" > "$statedir"tty' \
+	PROMPT_COMMAND='PS1="kitty-launch ! > "; echo "`tty`" > "$statedir"tty' \
 	kitty -T "Kitty Launcher" sh -c 'bash -t'
 fi
 
